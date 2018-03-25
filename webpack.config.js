@@ -1,11 +1,14 @@
 var path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    bundle: './src/bundle.js'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     libraryTarget: 'umd',
-    filename: 'index.js'
+    filename: '[name].js'
   },
   devtool: 'inline-source-map',
   devServer: {
