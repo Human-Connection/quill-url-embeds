@@ -72,7 +72,7 @@ After successfully fetching the meta infos, an embed is rendered.
 </div>
 ```
 
-##Utility functions
+## Utility functions
 
 ### utils.embedToAnchor
 
