@@ -15,7 +15,7 @@ class UrlEmbeds {
     this.registerPasteListener()
   }
   registerPasteListener () {
-    this.quill.clipboard.addMatcher(Node.TEXT_NODE, async (node, delta) => {
+    this.quill.clipboard.addMatcher(Node.TEXT_NODE, (node, delta) => {
       if (typeof node.data !== 'string') {
         return
       }
@@ -23,10 +23,10 @@ class UrlEmbeds {
       if (matches && matches.length > 0) {
         const newDelta = new Delta()
         let str = node.data
-        await matches.forEach(async url => {
+        matches.forEach(url => {
           const split = str.split(url)
           const beforeLink = split.shift()
-          const urlEmbed = await this.buildUrlEmbed(url)
+          const urlEmbed = this.buildUrlEmbed(url)
           newDelta.insert(beforeLink)
           newDelta.insert(urlEmbed)
           str = split.join(url)
@@ -78,17 +78,28 @@ class UrlEmbeds {
       .insert(urlEmbed)
     this.quill.updateContents(ops)
   }
-  async buildUrlEmbed (url) {
-    let embed = {
+  buildUrlEmbed (url) {
+    const embed = {
       urlEmbed: {
-        url: url
+        url: url,
+        html: url
       }
     }
-    let { data } = await this.getMetaInfo(url)
-    console.log(data)
-    embed.urlEmbed.html = data.embed && data.embed.html
-      ? data.embed.html : '<p>no embed html found</p>'
+    this.addMetaInfo(url)
     return embed
+  }
+  async addMetaInfo (url) {
+    const { data } = await this.getMetaInfo(url)
+    console.log(data)
+    const html = data.embed && data.embed.html
+      ? data.embed.html : 'no embed html found'
+    const embeds = document.querySelectorAll(`[data-url-embed="${url}"]`)
+    if (!embeds || !embeds.length) {
+      return
+    }
+    embeds.forEach(embed => {
+      embed.innerHTML = html
+    })
   }
   async getMetaInfo (url) {
     const requestUrl = `${this.options.metaApi}/embeds?url=${url}`
