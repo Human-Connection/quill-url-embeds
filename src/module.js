@@ -1,4 +1,5 @@
 import Delta from 'quill-delta'
+import axios from 'axios'
 
 const defaults = {
   // Only match single line urls
@@ -14,7 +15,7 @@ class UrlEmbeds {
     this.registerPasteListener()
   }
   registerPasteListener () {
-    this.quill.clipboard.addMatcher(Node.TEXT_NODE, (node, delta) => {
+    this.quill.clipboard.addMatcher(Node.TEXT_NODE, async (node, delta) => {
       if (typeof node.data !== 'string') {
         return
       }
@@ -22,13 +23,13 @@ class UrlEmbeds {
       if (matches && matches.length > 0) {
         const newDelta = new Delta()
         let str = node.data
-        console.log(this.quill)
-        matches.forEach(match => {
-          const split = str.split(match)
+        await matches.forEach(async url => {
+          const split = str.split(url)
           const beforeLink = split.shift()
+          const urlEmbed = await this.buildUrlEmbed(url)
           newDelta.insert(beforeLink)
-          newDelta.insert({urlEmbed: { url: match, html: '<iframe class="ql-video" frameborder="0" allowfullscreen="true" src="https://player.vimeo.com/video/70591644/"></iframe>' }})
-          str = split.join(match)
+          newDelta.insert(urlEmbed)
+          str = split.join(url)
         })
         newDelta.insert(str)
         delta.ops = newDelta.ops
@@ -60,20 +61,39 @@ class UrlEmbeds {
     if (!leaf.text) {
       return
     }
-    let urlMatch = leaf.text.match(this.options.urlRegex)
-    if (!urlMatch) {
+    console.log(leaf.text)
+    const matches = leaf.text.match(this.options.urlRegex)
+    if (!matches || !matches.length) {
       return
     }
-    let stepsBack = leaf.text.length - urlMatch.index
+    let stepsBack = leaf.text.length
     let index = sel.index - stepsBack
-    this.textToUrl(index, urlMatch[0])
+    this.textToUrl(index, matches[0])
   }
-  textToUrl (index, url) {
+  async textToUrl (index, url) {
+    const urlEmbed = await this.buildUrlEmbed(url)
     const ops = new Delta()
       .retain(index)
       .delete(url.length)
-      .insert(url, {link: url})
+      .insert(urlEmbed)
     this.quill.updateContents(ops)
+  }
+  async buildUrlEmbed (url) {
+    let embed = {
+      urlEmbed: {
+        url: url
+      }
+    }
+    let { data } = await this.getMetaInfo(url)
+    console.log(data)
+    embed.urlEmbed.html = data.embed && data.embed.html
+      ? data.embed.html : '<p>no embed html found</p>'
+    return embed
+  }
+  async getMetaInfo (url) {
+    const requestUrl = `${this.options.metaApi}/embeds?url=${url}`
+    const response = await axios.get(requestUrl)
+    return response
   }
 }
 

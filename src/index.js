@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import Quill from 'quill'
 import Parchment from 'parchment'
 import urlEmbed from './blot'
