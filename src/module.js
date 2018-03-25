@@ -27,7 +27,7 @@ class UrlEmbeds {
           const split = str.split(match)
           const beforeLink = split.shift()
           newDelta.insert(beforeLink)
-          newDelta.insert({urlEmbed: match})
+          newDelta.insert({urlEmbed: { url: match, html: '<iframe class="ql-video" frameborder="0" allowfullscreen="true" src="https://player.vimeo.com/video/70591644/"></iframe>' }})
           str = split.join(match)
         })
         newDelta.insert(str)

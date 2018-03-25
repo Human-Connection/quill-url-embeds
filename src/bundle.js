@@ -1,6 +1,5 @@
 import Quill from 'quill'
-import UrlEmbeds from './index'
-Quill.register(UrlEmbeds)
+import './index'
 
 let quill = new Quill('#editor', {
   theme: 'snow',

@@ -2,7 +2,7 @@
 
 Checks for URLs during typing and pasting and automatically converts them to embeds.
 
-Needs a REST endpoint, that provides meta infos for URLs.
+Needs an REST endpoint, that provides meta infos for URLs.
 
 ## Install
 
@@ -14,9 +14,7 @@ npm install quill-url-embeds --save
 
 ```javascript
 import Quill from 'quill';
-import urlEmbeds from 'quill-url-embeds';
-
-Quill.register('modules/urlEmbeds', urlEmbeds);
+import 'quill-url-embeds';
 ```
 
 Basic usage with default configuration:
