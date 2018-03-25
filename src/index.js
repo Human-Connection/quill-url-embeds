@@ -77,5 +77,5 @@ export default class UrlEmbeds {
 }
 
 if (window.Quill) {
-  window.Quill.register('modules/urlEmbeds', UrlEmbeds);
+  window.Quill.register('modules/urlEmbeds', UrlEmbeds)
 }
