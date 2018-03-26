@@ -1,6 +1,7 @@
 import Quill from 'quill'
 import './index'
 
+// eslint-disable-next-line
 let quill = new Quill('#editor', {
   theme: 'snow',
   modules: {

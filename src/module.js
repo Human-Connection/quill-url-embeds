@@ -102,6 +102,7 @@ class UrlEmbeds {
     })
   }
   async getMetaInfo (url) {
+    url = encodeURIComponent(url)
     const requestUrl = `${this.options.metaApi}/embeds?url=${url}`
     const response = await axios.get(requestUrl)
     return response
