@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "webpack --mode production -p --progress --colors",
-    "dev": "webpack-dev-server --mode development --open --progress --colors"
+    "dev": "webpack-dev-server --mode development --open --progress --hot --colors"
   },
   "repository": {
     "type": "git",
@@ -56,6 +56,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "lodash": "^4.17.5",
     "parchment": "^1.1.4",
     "quill": "^1.3.6",
     "quill-delta": "^3.6.2",

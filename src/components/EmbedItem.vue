@@ -1,0 +1,50 @@
+<template>
+  <div class="ql-embed-item">
+    <component
+      :url="url"
+      :meta="meta"
+      :is="componentType"></component>
+  </div>
+</template>
+
+<script>
+  import LinkEmbed from './LinkEmbed.vue'
+  import VideoEmbed from './VideoEmbed.vue'
+
+  export default {
+    name: 'ql-embed-item',
+    components: {
+      LinkEmbed,
+      VideoEmbed
+    },
+    props: {
+      url: {
+        type: String,
+        default: ''
+      },
+      meta: {
+        type: Object,
+        default () {
+          return {}
+        }
+      }
+    },
+    computed: {
+      componentType () {
+        if (this.meta.embed.type === 'video') {
+          return 'video-embed'
+        }
+        if (this.meta.embed.type === 'link') {
+          return 'link-embed'
+        }
+        return 'default-embed'
+      }
+    },
+    mounted () {
+      console.log(this.meta)
+    }
+  }
+</script>
+
+<style lang="scss">
+</style>

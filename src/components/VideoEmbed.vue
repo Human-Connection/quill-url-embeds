@@ -1,12 +1,12 @@
 <template>
-  <div class="embed-item">
-    {{ url }}
+  <div class="ql-video-embed">
+    <div v-if="meta.embed.html" v-html="meta.embed.html"></div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'embed-item',
+    name: 'ql-video-embed',
     props: {
       url: {
         type: String,
@@ -18,12 +18,9 @@
           return {}
         }
       }
-    },
-    mounted () {
-      console.log(this.meta)
     }
   }
 </script>
 
-<style scoped>
+<style lang="scss">
 </style>

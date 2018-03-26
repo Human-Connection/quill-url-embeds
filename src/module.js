@@ -1,7 +1,7 @@
 import Delta from 'quill-delta'
 import axios from 'axios'
 import Vue from 'vue'
-import EmbedItem from './component/EmbedItem.vue'
+import EmbedItem from './components/EmbedItem.vue'
 Vue.component(EmbedItem)
 
 const defaults = {
