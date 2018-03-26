@@ -38,7 +38,7 @@ module.exports = {
         }]
       }
     ]
-  },
+  }/**,
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -46,4 +46,5 @@ module.exports = {
       }
     }
   }
+  **/
 }
