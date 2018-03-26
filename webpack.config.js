@@ -1,4 +1,4 @@
-var path = require('path')
+const path = require('path')
 
 module.exports = {
   entry: {
@@ -38,5 +38,12 @@ module.exports = {
         }]
       }
     ]
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {test: /[\\/]node_modules[\\/]/, name: 'vendors', chunks: 'all'}
+      }
+    }
   }
 }
