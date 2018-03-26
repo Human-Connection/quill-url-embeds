@@ -108,7 +108,7 @@ Converts single line a-tags to embeds.
 
 ```javascript
 import { utils } from 'quill-url-embeds';
-utils.anchorToEmbed(content)
+utils.anchorToEmbed(content, metaApi)
 ```
 
 **Example:**
@@ -184,10 +184,11 @@ In your frontend you need to populate the sanitized content with embed code.
 
 ```javascript
 import { utils } from 'quill-url-embeds';
+const metaApi = 'http://your.metainfo.rest.service'
 
 const populateContent = (content) => {
   // Convert single line a-tags to embeds
-  content = utils.anchorToEmbed(content);
+  content = utils.anchorToEmbed(content, metaApi);
   return content;
 }
 ```
