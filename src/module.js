@@ -101,7 +101,8 @@ class UrlEmbeds {
       const embedDiv = document.createElement('div')
       embed.innerHTML = ''
       embed.appendChild(embedDiv)
-      new Vue({
+      // eslint-disable-next-line
+      const embedComponent = new Vue({
         el: embedDiv,
         render (createElement) {
           return createElement(EmbedItem, {
