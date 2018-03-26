@@ -1,5 +1,8 @@
 import Delta from 'quill-delta'
 import axios from 'axios'
+import Vue from 'vue'
+import EmbedItem from './component/EmbedItem.vue'
+Vue.component(EmbedItem)
 
 const defaults = {
   // Only match single line urls
@@ -90,18 +93,29 @@ class UrlEmbeds {
   }
   async addMetaInfo (url) {
     const { data } = await this.getMetaInfo(url)
-    console.log(data)
-    const html = data.embed && data.embed.html
-      ? data.embed.html : 'no embed html found'
     const embeds = document.querySelectorAll(`[data-url-embed="${url}"]`)
     if (!embeds || !embeds.length) {
       return
     }
     embeds.forEach(embed => {
-      embed.innerHTML = html
+      const embedDiv = document.createElement('div')
+      embed.innerHTML = ''
+      embed.appendChild(embedDiv)
+      new Vue({
+        el: embedDiv,
+        render (createElement) {
+          return createElement(EmbedItem, {
+            props: {
+              url,
+              meta: data
+            }
+          })
+        }
+      })
     })
   }
   async getMetaInfo (url) {
+    url = encodeURIComponent(url)
     const requestUrl = `${this.options.metaApi}/embeds?url=${url}`
     const response = await axios.get(requestUrl)
     return response

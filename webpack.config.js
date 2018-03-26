@@ -17,6 +17,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.js$/,
         include: path.join(__dirname, 'src'),
         exclude: /(node_modules|bower_components)/,
