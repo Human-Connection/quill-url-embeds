@@ -36,6 +36,7 @@
     display: inline-block;
     width: 16px;
     height: 16px;
+    line-height: 1;
 
     img {
       height: 100%;

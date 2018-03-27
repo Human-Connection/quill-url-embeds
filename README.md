@@ -14,13 +14,11 @@ npm install quill-url-embeds --save
 
 ```javascript
 import Quill from 'quill'
-import Parchment from 'parchment'
 import { urlEmbed, urlEmbedModule } from './index'
 Quill.register({
   'blots/urlEmbed': urlEmbed,
   'modules/urlEmbeds': urlEmbedModule
 })
-Parchment.register(urlEmbed)
 ```
 
 Basic usage with default configuration:
