@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
-import EmbedItem from './components/EmbedItem.vue'
+import EmbedItem from '../components/EmbedItem.vue'
 Vue.component(EmbedItem)
 
 class Populator {
