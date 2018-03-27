@@ -1,8 +1,5 @@
 import Delta from 'quill-delta'
-import axios from 'axios'
-import Vue from 'vue'
-import EmbedItem from './components/EmbedItem.vue'
-Vue.component(EmbedItem)
+import Populator from './utils/populator'
 
 const defaults = {
   // Only match single line urls
@@ -14,6 +11,7 @@ class UrlEmbeds {
     this.quill = quill
     options = options || {}
     this.options = {...defaults, ...options}
+    this.populator = new Populator(options.metaApi)
     this.registerTypeListener()
     this.registerPasteListener()
   }
@@ -64,7 +62,6 @@ class UrlEmbeds {
     if (!leaf.text) {
       return
     }
-    console.log(leaf.text)
     const matches = leaf.text.match(this.options.urlRegex)
     if (!matches || !matches.length) {
       return
@@ -88,38 +85,10 @@ class UrlEmbeds {
         html: url
       }
     }
-    this.addMetaInfo(url)
+    setTimeout(() => {
+      this.populator.populate(this.quill.container.firstChild)
+    }, 100)
     return embed
-  }
-  async addMetaInfo (url) {
-    const { data } = await this.getMetaInfo(url)
-    const embeds = document.querySelectorAll(`[data-url-embed="${url}"]`)
-    if (!embeds || !embeds.length) {
-      return
-    }
-    embeds.forEach(embed => {
-      const embedDiv = document.createElement('div')
-      embed.innerHTML = ''
-      embed.appendChild(embedDiv)
-      // eslint-disable-next-line
-      const embedComponent = new Vue({
-        el: embedDiv,
-        render (createElement) {
-          return createElement(EmbedItem, {
-            props: {
-              url,
-              meta: data
-            }
-          })
-        }
-      })
-    })
-  }
-  async getMetaInfo (url) {
-    url = encodeURIComponent(url)
-    const requestUrl = `${this.options.metaApi}/embeds?url=${url}`
-    const response = await axios.get(requestUrl)
-    return response
   }
 }
 

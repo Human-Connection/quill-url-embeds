@@ -1,5 +1,5 @@
 import Quill from 'quill'
-import { urlEmbed, urlEmbedModule } from './index'
+import { urlEmbed, urlEmbedModule, utils } from './index'
 Quill.register({
   'blots/urlEmbed': urlEmbed,
   'modules/urlEmbeds': urlEmbedModule
@@ -14,4 +14,13 @@ let quill = new Quill('#editor', {
     }
   },
   placeholder: 'Paste or type a url ...'
+})
+
+quill.on('text-change', (delta, oldDelta, source) => {
+  const el = document.getElementsByClassName('ql-editor')
+  const content = el[0].innerHTML
+  const sanitized = utils.embedToAnchor(content)
+  console.log(sanitized)
+  const rendered = utils.anchorToEmbed(sanitized)
+  console.log(rendered)
 })
