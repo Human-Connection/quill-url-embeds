@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import 'babel-polyfill'
 import urlEmbed from './blot'
 import urlEmbedModule from './module'

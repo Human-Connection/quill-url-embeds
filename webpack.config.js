@@ -14,6 +14,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist')
   },
+  target: "web",
   module: {
     rules: [
       {
