@@ -1,5 +1,7 @@
 # quill-url-embeds
 
+**Important: This is a WIP, do not use it in production**
+
 Checks for URLs during typing and pasting and automatically converts them to embeds.
 
 Needs an REST endpoint, that provides meta infos for URLs.

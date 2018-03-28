@@ -1,8 +1,8 @@
 <template>
   <span class="ql-embed-source-icon">
-    <img :src="icon"
+    <img :src="meta.icon.any"
         @error="hasError = true"
-        v-if="icon && !hasError" />
+        v-if="meta.icon && meta.icon.any && !hasError" />
     <span v-else>
       <svg viewBox="0 0 8 12" version="1.1">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -17,9 +17,11 @@
   export default {
     name: 'ql-embed-source-icon',
     props: {
-      icon: {
-        type: String,
-        default: ''
+      meta: {
+        type: Object,
+        default () {
+          return {}
+        }
       }
     },
     data () {

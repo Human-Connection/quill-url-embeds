@@ -4,12 +4,12 @@
       <span class="ql-embed-content">
         <span class="ql-embed-description">{{ description }}</span>
         <span class="ql-embed-source">
-          <source-icon :icon="meta.icon.any" />
+          <source-icon :meta="meta" />
           <small class="ql-embed-publisher">{{ publisher }}</small>
         </span>
       </span>
       <span class="ql-embed-image">
-        <source-image :image="meta.image.url" />
+        <source-image :meta="meta" />
       </span>
     </a>
   </div>
@@ -18,7 +18,7 @@
 <script>
   import SourceIcon from './SourceIcon.vue'
   import SourceImage from './SourceImage.vue'
-  import truncate from 'lodash/truncate'
+  import { truncate } from 'lodash'
 
   export default {
     name: 'ql-link-embed',
@@ -40,6 +40,9 @@
     },
     computed: {
       description () {
+        if (!this.meta.description) {
+          return 'No description found.'
+        }
         return truncate(this.meta.description, { length: 256 })
       },
       publisher () {
