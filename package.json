@@ -1,6 +1,6 @@
 {
   "name": "quill-url-embeds",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Checks for URLs during typing and pasting and automatically converts them to embedded media.",
   "main": "dist/index.js",
   "babel": {
