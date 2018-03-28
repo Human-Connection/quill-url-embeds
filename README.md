@@ -100,7 +100,7 @@ is converted to:
 <a target="_blank" href="https://vimeo.com/70591644">https://vimeo.com/70591644</a>
 ```
 
-### utils.Populator
+### utils.populator
 
 Converts all single line a-tags of a node to embeds.
 
@@ -108,8 +108,8 @@ Converts all single line a-tags of a node to embeds.
 
 ```javascript
 import { utils } from 'quill-url-embeds';
-const populator = new utils.Populator(metaApi)
-populator(node)
+const populator = new utils.populator(metaApi)
+populator.populate(node)
 ```
 
 **Example:**
@@ -187,11 +187,11 @@ In your frontend you need to populate the sanitized content with embed code. (No
 import { utils } from 'quill-url-embeds';
 
 const metaApi = 'http://your.metainfo.rest.service'
-const populator = new utils.Populator(metaApi)
+const populator = new utils.populator(metaApi)
 
 // Convert single line a-tags in #editor-content to embeds
 const node = document.getElementById('editor-content')
-populator(node)
+populator.populate(node)
 
 ```
 
