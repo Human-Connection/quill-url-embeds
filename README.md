@@ -97,7 +97,7 @@ utils.embedToAnchor(content)
 ```
 is converted to:
 ```html
-<a target="_blank" href="https://vimeo.com/70591644">https://vimeo.com/70591644</a>
+<a target="_blank" href="https://vimeo.com/70591644" data-url-embed>https://vimeo.com/70591644</a>
 ```
 
 ### utils.populator
@@ -114,7 +114,7 @@ populator.populate(node)
 
 **Example:**
 ```html
-<a target="_blank" href="https://vimeo.com/70591644">https://vimeo.com/70591644</a>
+<a target="_blank" href="https://vimeo.com/70591644" data-url-embed>https://vimeo.com/70591644</a>
 ```
 is converted to:
 ```html
@@ -160,15 +160,6 @@ const sanitizeContent = (content) => {
     },
     transformTags: {
       i: 'em',
-      a: (tagName, attribs) => {
-        return {
-          tagName: 'a',
-          attribs: {
-            href: attribs.href,
-            target: '_blank'
-          }
-        };
-      },
       b: 'strong'
     }
   });
@@ -189,7 +180,7 @@ import { utils } from 'quill-url-embeds'
 const metaApi = 'http://your.metainfo.rest.service'
 const populator = new utils.populator(metaApi)
 
-// Convert single line a-tags in #editor-content to embeds
+// Convert a-tags in #editor-content to embeds
 const node = document.getElementById('editor-content')
 populator.populate(node)
 
