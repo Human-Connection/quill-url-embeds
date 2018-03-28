@@ -1,11 +1,16 @@
 const path = require('path')
 const merge = require('webpack-merge')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = merge(common, {
+  devtool: 'source-map',
   plugins: [
-    new CleanWebpackPlugin(['dist'])
+    new CleanWebpackPlugin(['dist']),
+    new UglifyJSPlugin({
+      sourceMap: true
+    })
   ],
   entry: {
     index: './src/index.js'
