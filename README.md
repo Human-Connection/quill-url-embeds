@@ -85,7 +85,7 @@ Converts embeds to a-tags.
 **Usage:**
 
 ```javascript
-import { utils } from 'quill-url-embeds';
+import { utils } from 'quill-url-embeds'
 utils.embedToAnchor(content)
 ```
 
@@ -107,7 +107,7 @@ Converts all single line a-tags of a node to embeds.
 **Usage:**
 
 ```javascript
-import { utils } from 'quill-url-embeds';
+import { utils } from 'quill-url-embeds'
 const populator = new utils.populator(metaApi)
 populator.populate(node)
 ```
@@ -141,8 +141,8 @@ npm install sanitize-html --save
 ```
 
 ```javascript
-import sanitizeHtml from 'sanitize-html';
-import { utils } from 'quill-url-embeds';
+import sanitizeHtml from 'sanitize-html'
+import { utils } from 'quill-url-embeds'
 
 const sanitizeContent = (content) => {
   // Convert embeds to a-tags
@@ -184,7 +184,7 @@ In your frontend you need to populate the sanitized content with embed code. (No
 **Example:**
 
 ```javascript
-import { utils } from 'quill-url-embeds';
+import { utils } from 'quill-url-embeds'
 
 const metaApi = 'http://your.metainfo.rest.service'
 const populator = new utils.populator(metaApi)

@@ -1,5 +1,6 @@
 import cheerio from 'cheerio'
 
+// Todo: find tags by class
 const anchorToEmbed = (content) => {
   const $ = cheerio.load(content)
   $('body > a, body > p > a:only-child').each((i, el) => {
