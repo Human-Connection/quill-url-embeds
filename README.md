@@ -100,7 +100,7 @@ is converted to:
 <a target="_blank" href="https://vimeo.com/70591644">https://vimeo.com/70591644</a>
 ```
 
-### utils.populator
+### utils.Populator
 
 Converts all single line a-tags of a node to embeds.
 
