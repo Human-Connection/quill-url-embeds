@@ -40,7 +40,7 @@ class UrlEmbeds {
     })
   }
   registerTypeListener () {
-    this.quill.on('text-change', (delta) => {
+    this.quill.on('text-change', (delta, oldContents, source) => {
       let ops = delta.ops
       // Only return true, if last operation includes whitespace inserts
       // Equivalent to listening for enter, tab or space
@@ -56,7 +56,9 @@ class UrlEmbeds {
   }
   registerInitListener () {
     this.quill.once('editor-change', () => {
-      this.populator.populate(this.quill.container.firstChild)
+      setTimeout(() => {
+        this.populator.populate(this.quill.container.firstChild)
+      }, 1)
     })
   }
   checkTextForUrl () {
@@ -93,7 +95,7 @@ class UrlEmbeds {
     }
     setTimeout(() => {
       this.populator.populate(this.quill.container.firstChild)
-    }, 100)
+    }, 1)
     return embed
   }
 }
