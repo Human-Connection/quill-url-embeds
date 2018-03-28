@@ -14,6 +14,7 @@ class UrlEmbeds {
     this.populator = new Populator(options.metaApi)
     this.registerTypeListener()
     this.registerPasteListener()
+    this.registerInitListener()
   }
   registerPasteListener () {
     this.quill.clipboard.addMatcher(Node.TEXT_NODE, (node, delta) => {
@@ -51,6 +52,11 @@ class UrlEmbeds {
         return
       }
       this.checkTextForUrl()
+    })
+  }
+  registerInitListener () {
+    this.quill.once('editor-change', () => {
+      this.populator.populate(this.quill.container.firstChild)
     })
   }
   checkTextForUrl () {

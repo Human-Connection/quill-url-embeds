@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
+import anchorToEmbed from './anchor-to-embed'
 import EmbedItem from '../components/EmbedItem.vue'
 Vue.component(EmbedItem)
 
@@ -8,6 +9,9 @@ class Populator {
     this.metaApi = metaApi
   }
   async populate (node) {
+    let content = node.innerHTML
+    content = anchorToEmbed(node.innerHTML)
+    node.innerHTML = content
     const embeds = node.querySelectorAll('div[data-url-embed]')
     if (!embeds || !embeds.length) {
       return
