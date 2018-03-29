@@ -54,3 +54,8 @@ test('converts complex html correctly', () => {
 
   expect(embedToAnchor(content)).toBe(result)
 })
+
+test('can run without dom', () => {
+  const embedToAnchor2 = require('../dist/embed-to-anchor.js')
+  expect(embedToAnchor2).toBeTruthy()
+})
