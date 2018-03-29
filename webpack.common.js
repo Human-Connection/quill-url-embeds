@@ -2,6 +2,11 @@ const path = require('path')
 
 module.exports = {
   target: 'web',
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, 'src/')
+    }
+  },
   module: {
     rules: [
       {

@@ -1,4 +1,4 @@
-import Quill from 'quill'
+const Quill = require('quill')
 const BlockEmbed = Quill.import('blots/block/embed')
 
 class UrlEmbed extends BlockEmbed {

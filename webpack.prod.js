@@ -13,7 +13,8 @@ module.exports = merge(common, {
     })
   ],
   entry: {
-    index: './src/index.js'
+    index: './src/index.js',
+    'embed-to-anchor': './src/utils/embed-to-anchor.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),

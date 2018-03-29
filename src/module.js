@@ -1,5 +1,5 @@
 import Delta from 'quill-delta'
-import Populator from './utils/populator'
+import Populator from '~/utils/populator'
 
 const defaults = {
   // Only match single line urls

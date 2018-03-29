@@ -1,7 +1,6 @@
 import Quill from 'quill'
-import { urlEmbed, urlEmbedModule, utils } from './index'
+import { urlEmbed, urlEmbedModule } from '~/index'
 const metaApi = 'http://localhost:3050'
-const populator = new utils.populator(metaApi)
 Quill.register({
   'blots/urlEmbed': urlEmbed,
   'modules/urlEmbeds': urlEmbedModule
@@ -17,17 +16,3 @@ let quill = new Quill('#editor', {
   },
   placeholder: 'Paste or type a url ...'
 })
-
-/*
-quill.on('text-change', (delta, oldDelta, source) => {
-  const el = document.getElementsByClassName('ql-editor')
-  const content = el[0].innerHTML
-  const sanitized = utils.embedToAnchor(content)
-  console.log(sanitized)
-  const rendered = utils.anchorToEmbed(sanitized)
-  console.log(rendered)
-})
-*/
-
-const node = document.getElementById('test-content')
-populator.populate(node)

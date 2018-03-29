@@ -16,7 +16,7 @@ npm install quill-url-embeds --save
 
 ```javascript
 import Quill from 'quill'
-import { urlEmbed, urlEmbedModule } from './index'
+import { urlEmbed, urlEmbedModule } from 'quill-url-embeds'
 Quill.register({
   'blots/urlEmbed': urlEmbed,
   'modules/urlEmbeds': urlEmbedModule
@@ -82,11 +82,18 @@ After successfully fetching the meta infos, an embed is rendered.
 
 Converts embeds to a-tags.
 
-**Usage:**
+**Client Usage:**
 
 ```javascript
 import { utils } from 'quill-url-embeds'
 utils.embedToAnchor(content)
+```
+
+**Server Usage:**
+
+```javascript
+import embedToAnchor from 'quill-url-embeds/dist/embed-to-anchor'
+embedToAnchor(content)
 ```
 
 **Example:**
@@ -97,7 +104,7 @@ utils.embedToAnchor(content)
 ```
 is converted to:
 ```html
-<a target="_blank" href="https://vimeo.com/70591644" data-url-embed>https://vimeo.com/70591644</a>
+<a target="_blank" href="https://vimeo.com/70591644" data-url-embed="">https://vimeo.com/70591644</a>
 ```
 
 ### utils.populator
@@ -114,7 +121,7 @@ populator.populate(node)
 
 **Example:**
 ```html
-<a target="_blank" href="https://vimeo.com/70591644" data-url-embed>https://vimeo.com/70591644</a>
+<a target="_blank" href="https://vimeo.com/70591644" data-url-embed="">https://vimeo.com/70591644</a>
 ```
 is converted to:
 ```html
@@ -142,11 +149,11 @@ npm install sanitize-html --save
 
 ```javascript
 import sanitizeHtml from 'sanitize-html'
-import { utils } from 'quill-url-embeds'
+import embedToAnchor from 'quill-url-embeds/dist/embed-to-anchor'
 
 const sanitizeContent = (content) => {
   // Convert embeds to a-tags
-  content = utils.embedToAnchor(content);
+  content = embedToAnchor(content);
 
   // Sanitize content
   content = sanitizeHtml(content, {
