@@ -1,4 +1,4 @@
-import embedToAnchor from '../src/utils/embed-to-anchor'
+import embedToAnchor from '../../src/utils/embed-to-anchor'
 
 test('does nothing on normal string', () => {
   expect(embedToAnchor('test')).toBe('test')
@@ -56,6 +56,6 @@ test('converts complex html correctly', () => {
 })
 
 test('can run without dom', () => {
-  const embedToAnchor2 = require('../dist/embed-to-anchor.js')
+  const embedToAnchor2 = require('../../dist/embed-to-anchor.js')
   expect(embedToAnchor2).toBeTruthy()
 })
