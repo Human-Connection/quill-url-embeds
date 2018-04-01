@@ -4,7 +4,10 @@
 
 Checks for URLs during typing and pasting and automatically converts them to embeds.
 
-Needs an REST endpoint, that provides meta infos for URLs.
+## Prerequisites
+ 
+
+Setup an instance of [embed-api](https://github.com/Human-Connection/Embed-API) to provide a REST endpoint for local development or on your production server.
 
 ## Install
 
@@ -21,11 +24,7 @@ Quill.register({
   'blots/urlEmbed': urlEmbed,
   'modules/urlEmbeds': urlEmbedModule
 })
-```
 
-Basic usage with default configuration:
-
-```javascript
 const quill = new Quill(editor, {
   modules: {
     urlEmbeds: {
@@ -63,11 +62,11 @@ https://vimeo.com/70591644 is awesome.
 
 ### 2. Fetch Meta Infos
 
-After triggering meta infos for the given URL are fetched from the provided REST endpoint.
+After triggering, meta info for the given URL is fetched from the provided REST endpoint.
 
 ### 3. Render Embed Code
 
-After successfully fetching the meta infos, an embed is rendered.
+After successfully fetching the meta info, an embed is rendered.
 
 **Example Output:**
 ```html
@@ -109,7 +108,7 @@ is converted to:
 
 ### utils.populator
 
-Converts all single line a-tags of a node to embeds.
+Converts all single line a-tags inside a DOM node to embeds.
 
 **Usage:**
 
@@ -192,6 +191,28 @@ const node = document.getElementById('editor-content')
 populator.populate(node)
 
 ```
+
+## Development
+
+Setup a standalone version of this module + quill for local development:
+
+1. Make sure you have [yarn](https://yarnpkg.com) installed.
+
+2. Clone this repo
+   ``` bash
+   $ git clone https://github.com/Human-Connection/quill-url-embeds
+   ```
+
+3. Install your dependencies
+   ``` bash
+   $ cd ./quill-url-embeds
+   $ yarn
+   ```
+   
+4. Start development
+   ``` bash
+   $ yarn dev
+   ```
 
 
 
