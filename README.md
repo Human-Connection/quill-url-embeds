@@ -22,14 +22,14 @@ import Quill from 'quill'
 import { urlEmbed, urlEmbedModule } from 'quill-url-embeds'
 Quill.register({
   'blots/urlEmbed': urlEmbed,
-  'modules/urlEmbeds': urlEmbedModule
+  'modules/urlEmbeds': urlEmbedModule({
+    metaApi
+  })
 })
 
 const quill = new Quill(editor, {
   modules: {
-    urlEmbeds: {
-      metaApi: 'http://your.metainfo.rest.service'
-    }
+    urlEmbeds: {}
   }
 });
 ```
