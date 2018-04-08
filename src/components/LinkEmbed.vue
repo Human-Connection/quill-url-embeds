@@ -2,7 +2,7 @@
   <div class="ql-link-embed">
     <a :href="meta.url" target="_blank" class="ql-embed-link">
       <span class="ql-embed-content">
-        <span class="ql-embed-description">{{ description }}</span>
+        <span class="ql-embed-description" v-if="description">{{ description }}</span>
         <span class="ql-embed-source">
           <source-icon :meta="meta" />
           <small class="ql-embed-publisher">{{ publisher }}</small>
@@ -40,10 +40,11 @@
     },
     computed: {
       description () {
-        if (!this.meta.description) {
-          return 'No description found.'
+        let description = this.meta.description || this.meta.title
+        if (!description) {
+          return null
         }
-        return truncate(this.meta.description, { length: 256 })
+        return truncate(description, { length: 256 })
       },
       publisher () {
         return this.meta.site_name || truncate(this.meta.url, { length: 64 })

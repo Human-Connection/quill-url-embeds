@@ -31,10 +31,13 @@
     },
     computed: {
       componentType () {
-        if (this.meta.embed.type === 'video') {
+        if (this.meta.embed && this.meta.embed.type === 'video') {
           return 'video-embed'
         }
-        if (this.meta.embed.type === 'link') {
+        if (this.meta.embed && this.meta.embed.type === 'link') {
+          return 'link-embed'
+        }
+        if (this.meta.site_name && this.meta.url) {
           return 'link-embed'
         }
         return 'default-embed'

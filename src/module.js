@@ -24,24 +24,15 @@ const urlEmbedBuilder = (initOptions) => {
         }
         const matches = node.data.match(this.options.urlRegex)
         if (matches && matches.length > 0) {
-          const newDelta = new Delta()
-          let str = node.data
-          matches.forEach(url => {
-            const split = str.split(url)
-            const beforeLink = split.shift()
-            const urlEmbed = this.buildUrlEmbed(url)
-            newDelta.insert(beforeLink)
-            newDelta.insert(urlEmbed)
-            str = split.join(url)
-          })
-          newDelta.insert(str)
-          delta.ops = newDelta.ops
+          setTimeout(() => {
+            this.checkTextForUrl()
+          }, 1)
         }
         return delta
       })
     }
     registerTypeListener () {
-      this.quill.on('text-change', (delta, oldContents, source) => {
+      this.quill.on('text-change', (delta) => {
         let ops = delta.ops
         // Only return true, if last operation includes whitespace inserts
         // Equivalent to listening for enter, tab or space
@@ -67,15 +58,15 @@ const urlEmbedBuilder = (initOptions) => {
       if (!sel) {
         return
       }
-      let [leaf] = this.quill.getLeaf(sel.index)
-      if (!leaf.text) {
+      let [line] = this.quill.getLine(sel.index)
+      if (!line.domNode || !line.domNode.innerText) {
         return
       }
-      const matches = leaf.text.match(this.options.urlRegex)
+      const matches = line.domNode.innerText.match(this.options.urlRegex)
       if (!matches || !matches.length) {
         return
       }
-      let stepsBack = leaf.text.length
+      let stepsBack = line.domNode.innerText.length
       let index = sel.index - stepsBack
       this.textToUrl(index, matches[0])
     }
@@ -86,6 +77,9 @@ const urlEmbedBuilder = (initOptions) => {
         .delete(url.length)
         .insert(urlEmbed)
       this.quill.updateContents(ops)
+      setTimeout(() => {
+        this.quill.setSelection(index + 1)
+      }, 100)
     }
     buildUrlEmbed (url) {
       const embed = {
