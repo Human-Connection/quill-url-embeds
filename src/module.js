@@ -29,7 +29,6 @@ const urlEmbedBuilder = (initOptions) => {
         const matches = node.data.match(this.options.urlRegex)
         if (matches && matches.length > 0) {
           setTimeout(() => {
-            console.log('paste-listener: try to check for url')
             this.checkTextForUrl()
           }, 1)
         }
@@ -38,12 +37,10 @@ const urlEmbedBuilder = (initOptions) => {
     }
     registerTypeListener () {
       this.quill.on('text-change', (delta, oldDelta, source) => {
-        console.log('text-change by', source)
         if (source == 'api' || !this.userHasTyped) {
           return
         }
         let ops = delta.ops
-        console.log(ops)
         // Only return true, if last operation includes whitespace inserts
         // Equivalent to listening for enter, tab or space
         if (!ops || ops.length < 1 || ops.length > 2) {
@@ -53,14 +50,12 @@ const urlEmbedBuilder = (initOptions) => {
         if (!lastOp.insert || typeof lastOp.insert !== 'string' || !lastOp.insert.match(/\s/)) {
           return
         }
-        console.log('text-change: try to check for url')
         this.checkTextForUrl()
       })
     }
     registerInitListener () {
       this.quill.once('editor-change', () => {
         setTimeout(() => {
-          console.log('editor-change: try to populate')
           this.populator.populate(this.quill.container.firstChild)
         }, 1)
       })
@@ -101,7 +96,6 @@ const urlEmbedBuilder = (initOptions) => {
         }
       }
       setTimeout(() => {
-        console.log('text-to-url: try to populate')
         this.populator.populate(this.quill.container.firstChild)
       }, 1)
       return embed
