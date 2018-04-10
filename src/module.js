@@ -39,6 +39,7 @@ const urlEmbedBuilder = (initOptions) => {
           return
         }
         let ops = delta.ops
+        console.log(ops)
         // Only return true, if last operation includes whitespace inserts
         // Equivalent to listening for enter, tab or space
         if (!ops || ops.length < 1 || ops.length > 2) {
