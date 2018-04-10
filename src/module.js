@@ -16,6 +16,10 @@ const urlEmbedBuilder = (initOptions) => {
       this.registerTypeListener()
       this.registerPasteListener()
       this.registerInitListener()
+      this.userHasTyped = false
+      window.addEventListener('keydown', () => {
+        this.userHasTyped = true
+      }, { once: true })
     }
     registerPasteListener () {
       this.quill.clipboard.addMatcher(Node.TEXT_NODE, (node, delta) => {
@@ -35,7 +39,7 @@ const urlEmbedBuilder = (initOptions) => {
     registerTypeListener () {
       this.quill.on('text-change', (delta, oldDelta, source) => {
         console.log('text-change by', source)
-        if (source == 'api') {
+        if (source == 'api' || !this.userHasTyped) {
           return
         }
         let ops = delta.ops
