@@ -33,7 +33,11 @@ const urlEmbedBuilder = (initOptions) => {
       })
     }
     registerTypeListener () {
-      this.quill.on('text-change', (delta) => {
+      this.quill.on('text-change', (delta, oldDelta, source) => {
+        console.log('text-change by', source)
+        if (source == 'api') {
+          return
+        }
         let ops = delta.ops
         // Only return true, if last operation includes whitespace inserts
         // Equivalent to listening for enter, tab or space
