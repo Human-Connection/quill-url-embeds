@@ -25,6 +25,7 @@ const urlEmbedBuilder = (initOptions) => {
         const matches = node.data.match(this.options.urlRegex)
         if (matches && matches.length > 0) {
           setTimeout(() => {
+            console.log('paste-listener: try to check for url')
             this.checkTextForUrl()
           }, 1)
         }
@@ -43,12 +44,14 @@ const urlEmbedBuilder = (initOptions) => {
         if (!lastOp.insert || typeof lastOp.insert !== 'string' || !lastOp.insert.match(/\s/)) {
           return
         }
+        console.log('text-change: try to check for url')
         this.checkTextForUrl()
       })
     }
     registerInitListener () {
       this.quill.once('editor-change', () => {
         setTimeout(() => {
+          console.log('editor-change: try to populate')
           this.populator.populate(this.quill.container.firstChild)
         }, 1)
       })
@@ -89,6 +92,7 @@ const urlEmbedBuilder = (initOptions) => {
         }
       }
       setTimeout(() => {
+        console.log('text-to-url: try to populate')
         this.populator.populate(this.quill.container.firstChild)
       }, 1)
       return embed

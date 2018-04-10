@@ -1,6 +1,6 @@
 {
   "name": "quill-url-embeds",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Checks for URLs during typing and pasting and automatically converts them to embedded media.",
   "main": "dist/index.js",
   "babel": {
@@ -11,14 +11,14 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testMatch": [ "/tests/unit/**/*.test.js?(x)" ],
+    "testMatch": [ "./tests/unit/**/*.test.js" ],
     "verbose": true,
     "moduleNameMapper": {
       "~": "<rootDir>"
     }
   },
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --watch .",
     "test:e2e": "testcafe chrome ./tests/e2e/**/*.test.js --app \"npm run dev\" --app-init-delay 5000 -S -s screenshots",
     "build": "webpack --mode production --progress --colors --config webpack.prod.js",
     "dev": "ENV NODE_ENV=development webpack-dev-server --mode development --hot --colors --config webpack.dev.js"
