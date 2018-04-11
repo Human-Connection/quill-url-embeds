@@ -10,11 +10,8 @@ class Populator {
   }
   async populate (node) {
     let content = node.innerHTML
-    console.log('before anchorToEmbed', content)
     content = anchorToEmbed(content)
-    console.log('after anchorToEmbed', content)
     node.innerHTML = content
-    console.log('after reassigned innerHTML', node.innerHTML)
     const embeds = node.querySelectorAll('div[data-url-embed]')
     if (!embeds || !embeds.length) {
       return
@@ -42,7 +39,6 @@ class Populator {
         }
       })
     })
-    console.log('after populate', node.innerHTML)
   }
   async getMetaInfo (url) {
     url = encodeURIComponent(url)

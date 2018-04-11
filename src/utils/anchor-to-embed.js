@@ -9,8 +9,6 @@ const anchorToEmbed = (content) => {
     $(replaceEl).replaceWith(tag)
   })
   if ($('body > *:last-child').hasClass('url-embed')) {
-    console.log('last child is embed')
-    console.log($('body > *:last-child'))
     $('body').append('<p></p>')
   }
   return $('body').html()
