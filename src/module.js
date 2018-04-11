@@ -23,6 +23,9 @@ const urlEmbedBuilder = (initOptions) => {
     }
     registerPasteListener () {
       this.quill.clipboard.addMatcher(Node.TEXT_NODE, (node, delta) => {
+        if (!this.userHasTyped) {
+          return
+        }
         if (typeof node.data !== 'string') {
           return
         }
