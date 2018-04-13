@@ -2,7 +2,9 @@
   <div class="ql-link-embed">
     <a :href="meta.url" target="_blank" class="ql-embed-link">
       <span class="ql-embed-content">
-        <span class="ql-embed-description" v-if="description">{{ description }}</span>
+        <span class="ql-embed-description" v-if="description">
+          <span class="ql-embed-description-inner">{{ description }} {{ description }}</span>
+        </span>
         <span class="ql-embed-source">
           <source-icon :meta="meta" />
           <small class="ql-embed-publisher">{{ publisher }}</small>
@@ -81,6 +83,14 @@
 
     .ql-embed-description {
       flex: 1 1 0;
+    }
+
+    .ql-embed-description-inner {
+      max-height: 115px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
     }
 
     .ql-embed-source {
