@@ -10,12 +10,14 @@
 <script>
   import LinkEmbed from './LinkEmbed.vue'
   import VideoEmbed from './VideoEmbed.vue'
+  import DefaultEmbed from './DefaultEmbed.vue'
 
   export default {
     name: 'ql-embed-item',
     components: {
       LinkEmbed,
-      VideoEmbed
+      VideoEmbed,
+      DefaultEmbed
     },
     props: {
       url: {
